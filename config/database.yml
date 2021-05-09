@@ -48,8 +48,13 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+stage:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+
 production:
   <<: *default
-  database: sylvia_luchez_v3_backend_production
-  username: sylvia_luchez_v3_backend
-  password: <%= ENV['SYLVIA_LUCHEZ_V3_BACKEND_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # database: sylvia_luchez_v3_backend_production
+  # username: sylvia_luchez_v3_backend
+  # password: <%= ENV['SYLVIA_LUCHEZ_V3_BACKEND_DATABASE_PASSWORD'] %>
