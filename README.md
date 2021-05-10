@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Commands
 
-Things you may want to cover:
+### Push
 
-* Ruby version
+```
+git push -f stage main:master
+git push -f prod main:master
+```
 
-* System dependencies
+### Migrate
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+heroku run rake db:migrate -r stage
+heroku run rake db:migrate -r prod
+```
