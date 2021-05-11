@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby '2.7.3'
 
 gem 'activeadmin'
 gem 'devise'
@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'rollbar'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
