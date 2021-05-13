@@ -12,6 +12,6 @@ git push -f prod main:master
 ### Migrate
 
 ```
-heroku run rake db:migrate -r stage
-heroku run rake db:migrate -r prod
+heroku run -r stage rake db:migrate
+heroku run -r prod rake db:migrate
 ```

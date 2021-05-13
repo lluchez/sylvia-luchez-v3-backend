@@ -10,7 +10,7 @@ ActionMailer::Base.smtp_settings = {
   :password => ENV['SMTP_PASSWORD'].presence || ENV['SENDGRID_API_KEY'], # This is the secret sendgrid API key which was issued during API key creation
   # :domain => 'sylvialuchez.com',
   :address => ENV['SMTP_ADDRESS'].presence || 'smtp.sendgrid.net',
-  :port => 587,
+  :port => ENV['SMTP_PORT'].present? ? ENV['SMTP_PORT'].to_i : 587,
   :authentication => :plain,
   :enable_starttls_auto => true
 }
