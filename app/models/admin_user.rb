@@ -35,7 +35,10 @@ class AdminUser < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :trackable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :lockable, :trackable
+  # :registerable, :confirmable
+
+  scope :locked, lambda { where('locked_at IS NOT NULL') }
+  scope :active, lambda { where(:locked_at => nil) }
+
 end

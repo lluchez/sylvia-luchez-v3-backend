@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  actions :all, :except => [:destroy]
   permit_params :email, :password, :password_confirmation
 
   index do
@@ -11,6 +12,14 @@ ActiveAdmin.register AdminUser do
     actions
   end
 
+  scope :all
+  scope :active, :default => true do |admin_users|
+    admin_users.active
+  end
+  scope :locked do |admin_users|
+    admin_users.locked
+  end
+
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
@@ -19,7 +28,6 @@ ActiveAdmin.register AdminUser do
   show do |admin_user|
     attributes_table :title => 'Account Details' do
       row :email
-      row :confirmed_at
       row :failed_attempts
       row :locked_at
       row :created_at
