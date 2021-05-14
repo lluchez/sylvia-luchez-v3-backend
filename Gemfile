@@ -5,7 +5,7 @@ ruby '2.7.3'
 
 gem 'activeadmin'
 gem 'audited'
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', '>= 1.4.4', :require => false
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
@@ -26,7 +26,6 @@ gem 'webpacker', '~> 5.0'
 
 
 group :development, :test do
-  gem 'annotate'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
@@ -42,6 +41,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
+  gem 'rubocop-rails', :require => false
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -65,4 +66,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
