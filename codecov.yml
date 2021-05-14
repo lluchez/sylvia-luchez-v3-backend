@@ -1,0 +1,15 @@
+coverage:
+  status:
+    patch:
+      default:
+        threshold: "5%"
+    project:
+      default:
+        threshold: "0.1%"
+
+  ignore:
+    - spec/.*
+    - app/assets/.*
+    - app/views/.*
+    - public/.*
+    - vendor/.*
