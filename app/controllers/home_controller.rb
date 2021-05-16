@@ -6,4 +6,8 @@ class HomeController < ApplicationController
       redirect_to(admin_user_session_path)
     end
   end
+
+  def health
+    render :json => 'ok'
+  end
 end
