@@ -13,19 +13,15 @@ ActiveAdmin.register AdminUser do
   end
 
   scope :all
-  scope :active, :default => true do |admin_users|
-    admin_users.active
-  end
-  scope :locked do |admin_users|
-    admin_users.locked
-  end
+  scope :active, :default => true, &:active
+  scope :locked, &:locked
 
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
 
-  show do |admin_user|
+  show do
     attributes_table :title => 'Account Details' do
       row :email
       row :failed_attempts
@@ -47,11 +43,10 @@ ActiveAdmin.register AdminUser do
 
   form do |f|
     f.inputs do
-      f.input :email
+      f.input :email, :required => true
       f.input :password
       f.input :password_confirmation
     end
     f.actions
   end
-
 end

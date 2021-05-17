@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_11_233001) do
+ActiveRecord::Schema.define(version: 2021_05_16_212635) do
 
   create_table "active_admin_comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -87,6 +87,35 @@ ActiveRecord::Schema.define(version: 2021_05_11_233001) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "folders", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "visible", default: true, null: false
+    t.integer "parent_folder_id"
+    t.integer "from_year"
+    t.integer "to_year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_folder_id"], name: "index_folders_on_parent_folder_id"
+  end
+
+  create_table "projects", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "folder_id", null: false
+    t.boolean "visible", default: true, null: false
+    t.integer "year"
+    t.string "medium"
+    t.decimal "width", precision: 10
+    t.decimal "height", precision: 10
+    t.decimal "depth", precision: 10
+    t.date "purchased_at"
+    t.string "purchased_by"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["folder_id"], name: "index_projects_on_folder_id"
+    t.index ["medium"], name: "index_projects_on_medium"
+    t.index ["purchased_at"], name: "index_projects_on_purchased_at"
   end
 
 end
