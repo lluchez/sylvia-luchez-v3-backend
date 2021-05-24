@@ -1,0 +1,10 @@
+<% if project.photo.persisted? %>
+  <div>
+    <img src="<%= url_for(project.sized_photo(:thumbnail)) %>" />
+    <p><%= link_to('Original', url_for(project.photo)) %></p>
+    <p><%= link_to('Large', url_for(project.sized_photo(:large))) %></p>
+    <p><%= link_to('Thumbnail', url_for(project.sized_photo(:thumbnail))) %></p>
+  </div>
+<% else %>
+  <div>No photo</div>
+<% end %>

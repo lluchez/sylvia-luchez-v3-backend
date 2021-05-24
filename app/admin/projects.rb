@@ -1,6 +1,6 @@
 ActiveAdmin.register Project do
   actions :all, :except => [:destroy]
-  permit_params :name, :folder_id, :visible, :year, :medium,
+  permit_params :name, :folder_id, :visible, :year, :medium, :photo,
                 :width, :height, :depth, :purchased_at, :purchased_by
 
   controller do
@@ -39,6 +39,9 @@ ActiveAdmin.register Project do
     attributes_table :title => 'Project Details' do
       row :name
       row :folder
+      row :photo do |project|
+        render :partial => 'admin/photo', :locals => { :project => project }
+      end
       row :year
       row :medium
       row :visible
@@ -67,6 +70,7 @@ ActiveAdmin.register Project do
     f.inputs do
       f.input :name, :required => true
       f.input :folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection
+      f.input :image, :as => :file
       f.input :year
       f.input :medium
       f.input :visible

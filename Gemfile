@@ -3,11 +3,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
+gem 'aws-sdk-s3', :require => false
 gem 'activeadmin'
 gem 'audited'
 gem 'bootsnap', '>= 1.4.4', :require => false
 gem 'delayed_job_active_record'
 gem 'devise'
+gem 'image_processing'
 gem 'jbuilder', '~> 2.7'
 gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.0'

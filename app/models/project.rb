@@ -33,6 +33,23 @@ class Project < ApplicationRecord
 
   belongs_to :folder
 
+  has_one_attached :photo
+
+  def self.sizes
+    {
+      :thumbnail => { :resize_to_fit => [400, 250] },
+      :large => { :resize_to_fit => [1200, 1200] }
+    }
+  end
+
+  def sized_photo(size)
+    photo.variant(self.class.sizes[size]).processed
+  end
+
+  # def sized_photo_persisted?(size)
+  #   self.photo.variant(self.class.sizes[size]).persisted?
+  # end
+
   before_validation do |p|
     p.purchased_by = p.purchased_by.presence
   end
