@@ -67,6 +67,7 @@ ActiveAdmin.register Project do
   end
 
   form do |f|
+    f.semantic_errors
     f.inputs do
       f.input :name, :required => true
       f.input :folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection

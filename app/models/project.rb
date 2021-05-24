@@ -32,8 +32,13 @@ class Project < ApplicationRecord
   scope :not_sold, -> { where(:purchased_at => nil) }
 
   belongs_to :folder
-
   has_one_attached :photo
+
+  validates :name, :folder_id, :presence => true
+
+  before_validation do |p|
+    p.purchased_by = p.purchased_by.presence
+  end
 
   def self.sizes
     {
@@ -44,14 +49,6 @@ class Project < ApplicationRecord
 
   def sized_photo(size)
     photo.variant(self.class.sizes[size]).processed
-  end
-
-  # def sized_photo_persisted?(size)
-  #   self.photo.variant(self.class.sizes[size]).persisted?
-  # end
-
-  before_validation do |p|
-    p.purchased_by = p.purchased_by.presence
   end
 
   def sold?

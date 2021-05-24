@@ -53,6 +53,7 @@ ActiveAdmin.register Folder do
   end
 
   form do |f|
+    f.semantic_errors
     f.inputs do
       f.input :name, :required => true
       f.input :from_year

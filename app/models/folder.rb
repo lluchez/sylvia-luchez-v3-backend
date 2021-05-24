@@ -24,6 +24,8 @@ class Folder < ApplicationRecord
   scope :child_of, ->(parent_id) { where(:parent_folder_id => parent_id) }
 
   has_many :projects
-  belongs_to :parent_folder, :class_name => 'Folder'
+  belongs_to :parent_folder, :class_name => 'Folder', :optional => true
   has_many :sub_folders, :foreign_key => :parent_folder_id, :class_name => 'Folder'
+
+  validates :name, :presence => true
 end
