@@ -71,7 +71,7 @@ ActiveAdmin.register Project do
     f.inputs do
       f.input :name, :required => true
       f.input :folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection
-      f.input :image, :as => :file
+      f.input :photo, :as => :file
       f.input :year
       f.input :medium
       f.input :visible
