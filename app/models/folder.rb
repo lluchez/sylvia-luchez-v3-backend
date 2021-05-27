@@ -27,5 +27,5 @@ class Folder < ApplicationRecord
   belongs_to :parent_folder, :class_name => 'Folder', :optional => true
   has_many :sub_folders, :foreign_key => :parent_folder_id, :class_name => 'Folder'
 
-  validates :name, :presence => true
+  validates_presence_of :name
 end
