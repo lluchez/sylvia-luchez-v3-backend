@@ -15,14 +15,40 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter '/config/'
+  add_filter '/spec/'
+  add_filter '/app/admin/'
+
+  add_group 'Models', 'app/models'
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Libs', 'lib'
+  add_group 'Helpers', 'app/helpers'
+end
 
 if ENV['CI'] == 'true'
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
+require 'shoulda-matchers'
+require 'audited-rspec'
+
 RSpec.configure do |config|
+  # config.include Devise::Test::ControllerHelpers, :type => :controller
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
