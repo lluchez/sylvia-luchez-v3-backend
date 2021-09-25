@@ -27,7 +27,7 @@ ActiveAdmin.register Project do
 
   scope :all
   scope :visible, :default => true, &:visible
-  scope :hidden, &:hidden
+  scope :archived, &:archived
 
   filter :name
   filter :folder, :as => :select, :collection => proc { ActiveAdminHelper.folder_collection }

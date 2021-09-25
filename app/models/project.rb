@@ -23,10 +23,9 @@
 #  index_projects_on_purchased_at  (purchased_at)
 #
 class Project < ApplicationRecord
+  include Archiveable
   audited
 
-  scope :visible, -> { where(:visible => true) }
-  scope :hidden, -> { where(:visible => false) }
   scope :child_of, ->(folder_id) { where(:folder_id => folder_id) }
   scope :sold, -> { where.not(:purchased_at => nil) }
   scope :not_sold, -> { where(:purchased_at => nil) }

@@ -16,10 +16,9 @@
 #  index_folders_on_parent_folder_id  (parent_folder_id)
 #
 class Folder < ApplicationRecord
+  include Archiveable
   audited
 
-  scope :visible, -> { where(:visible => true) }
-  scope :hidden, -> { where(:visible => false) }
   scope :root, -> { where(:parent_folder_id => nil) }
   scope :child_of, ->(parent_id) { where(:parent_folder_id => parent_id) }
 

@@ -16,12 +16,12 @@ describe Project do
   end
 
   describe 'scopes' do
-    context 'visible/hidden' do
+    context 'visible/archived' do
       it 'should properly check projects visibility' do
         project1 = create(:project)
         project2 = create(:project, :visible => false)
         expect(described_class.visible.pluck(:id)).to eq([project1.id])
-        expect(described_class.hidden.pluck(:id)).to eq([project2.id])
+        expect(described_class.archived.pluck(:id)).to eq([project2.id])
       end
     end
 
