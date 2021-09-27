@@ -37,6 +37,7 @@ class Project < ApplicationRecord
 
   before_validation do |p|
     p.purchased_by = p.purchased_by.presence
+    p.folder = Folder.root_folder unless p.folder.present?
   end
 
   def self.sizes

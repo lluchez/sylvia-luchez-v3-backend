@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id           :bigint           not null, primary key
+#  depth        :decimal(10, )
+#  height       :decimal(10, )
+#  medium       :string(255)
+#  name         :string(255)      not null
+#  purchased_at :date
+#  purchased_by :string(255)
+#  visible      :boolean          default(TRUE), not null
+#  width        :decimal(10, )
+#  year         :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  folder_id    :integer          not null
+#
+# Indexes
+#
+#  index_projects_on_folder_id     (folder_id)
+#  index_projects_on_medium        (medium)
+#  index_projects_on_purchased_at  (purchased_at)
+#
 require 'rails_helper'
 
 describe Project do
@@ -42,6 +66,56 @@ describe Project do
         project2 = create(:project, :sold)
         expect(described_class.not_sold.pluck(:id)).to eq([project1.id])
         expect(described_class.sold.pluck(:id)).to eq([project2.id])
+      end
+    end
+  end
+
+  describe '#sold?' do
+    context 'when purchased date is set' do
+      it 'should return true' do
+        expect(create(:project, :purchased_at => Date.today).sold?).to eq(true)
+      end
+    end
+
+    context 'when purchased date is not set' do
+      it 'should return false' do
+        expect(create(:project, :purchased_at => nil).sold?).to eq(false)
+      end
+    end
+  end
+
+  describe '#validation' do
+    context 'when purchased by is a blank text' do
+      it 'should nil it' do
+        project = create(:project, :purchased_by => '')
+        expect(project.purchased_by).to eq(nil)
+
+        project = build(:project, :purchased_by => '')
+        expect(project.valid?).to eq(true)
+        expect(project.purchased_by).to eq(nil)
+      end
+    end
+
+    context 'when folder is blank' do
+      it 'should create under the root folder' do
+        root_folder = create(:root_folder)
+        project = create(:project, :folder => nil)
+        expect(project.folder).to eq(root_folder)
+
+        project = build(:project, :folder => nil)
+        expect(project.valid?).to eq(true)
+        expect(project.folder).to eq(root_folder)
+      end
+
+      it 'should keep the assigned folder if set' do
+        create(:root_folder)
+        other_folder = create(:folder)
+        project = create(:project, :folder => other_folder)
+        expect(project.folder).to eq(other_folder)
+
+        project = build(:project, :folder => other_folder)
+        expect(project.valid?).to eq(true)
+        expect(project.folder).to eq(other_folder)
       end
     end
   end

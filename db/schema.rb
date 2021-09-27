@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_110025) do
+ActiveRecord::Schema.define(version: 2021_09_25_194033) do
 
   create_table "active_admin_comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -125,7 +125,9 @@ ActiveRecord::Schema.define(version: 2021_05_23_110025) do
     t.integer "to_year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "root"
     t.index ["parent_folder_id"], name: "index_folders_on_parent_folder_id"
+    t.index ["root"], name: "index_folders_on_root", unique: true
   end
 
   create_table "projects", charset: "utf8mb4", force: :cascade do |t|

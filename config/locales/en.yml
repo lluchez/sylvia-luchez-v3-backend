@@ -30,4 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        folder:
+          attributes:
+            root:
+              cant_change_root: "Cannot unmark the root folder"
+            visible:
+              archived_root: "Cannot archive the root folder"

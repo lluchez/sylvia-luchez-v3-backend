@@ -18,24 +18,28 @@ ActiveAdmin.register Folder do
     column :name
     column :parent_folder
     column :visible
+    column :root
     column :created_at
     actions
   end
 
   scope :all
   scope :visible, :default => true, &:visible
+  scope :root, &:root
   scope :archived, &:archived
 
   filter :name
   filter :parent_folder, :as => :select, :collection => proc { ActiveAdminHelper.folder_collection }
   filter :created_at
 
-  show do
+  show do |f|
     attributes_table do
       row :name
-      row :from_year
-      row :to_year
-      row :parent_folder
+      unless f.root?
+        row :from_year
+        row :to_year
+        row :parent_folder
+      end
       row 'Sub folders' do |folder|
         folder.sub_folders.count
       end
@@ -56,10 +60,12 @@ ActiveAdmin.register Folder do
     f.semantic_errors
     f.inputs do
       f.input :name, :required => true
-      f.input :from_year
-      f.input :to_year
-      f.input :parent_folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection
-      f.input :visible
+      unless f.object.root?
+        f.input :from_year
+        f.input :to_year
+        f.input :parent_folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection
+        f.input :visible
+      end
     end
     f.actions
   end

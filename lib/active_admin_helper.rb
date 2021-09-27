@@ -1,4 +1,4 @@
-module ActiveAdminHelper
+class ActiveAdminHelper
   class << self
     # YES_NO_COLLECTION = [[true.humanize, true], [false.humanize, false]].freeze
 
