@@ -6,7 +6,7 @@ ActiveAdmin.register Project do
   controller do
     def scoped_collection
       if ['index'].include?(params[:action])
-        end_of_association_chain.includes(:folder)
+        end_of_association_chain.includes(:folder, :photo_attachment => :blob)
       else
         super
       end
@@ -14,14 +14,19 @@ ActiveAdmin.register Project do
   end
 
   index do
-    selectable_column
+    # selectable_column
     id_column
     column :name
     column :folder
+    column :image do |p|
+      image_tag(p.sized_photo(:thumbnail), :class => 'project-thumbnail') if p.photo.persisted?
+    end
     column :year
     column :medium
     column :visible
-    column :created_at
+    column :created_at do |p|
+      p.created_at.to_date
+    end
     actions
   end
 
