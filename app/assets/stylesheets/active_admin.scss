@@ -19,8 +19,11 @@
 #index_table_projects {
   td {
     vertical-align: middle;
-  }
-  .project-thumbnail {
-    height: 50px;
+    &.col-image {
+      text-align: center;
+      .project-thumbnail {
+        height: 50px;
+      }
+    }
   }
 }
