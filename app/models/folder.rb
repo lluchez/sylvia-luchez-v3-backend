@@ -22,6 +22,7 @@ class Folder < ApplicationRecord
   audited
 
   scope :root, -> { where(:root => true) }
+  scope :not_root, -> { where(:root => nil) }
   scope :child_of, ->(parent_id) { where(:parent_folder_id => parent_id) }
 
   def self.root_folder
@@ -38,14 +39,14 @@ class Folder < ApplicationRecord
     f.parent_folder_id = Folder.root_folder&.id if f.parent_folder.blank? && !f.root?
   end
 
-  validate :root_attribute_wont_change, :if => Proc.new { |f| f.root_was }
-  validate :visible_root_folder, :if => Proc.new { |f| f.root? }
+  validate :root_attribute_wont_change, :if => proc { |f| f.root_was }
+  validate :visible_root_folder, :if => proc { |f| f.root? }
 
   def root_attribute_wont_change
-    self.errors.add(:root, :cant_change_root) if self.persisted? && self.root_changed?
+    errors.add(:root, :cant_change_root) if persisted? && root_changed?
   end
 
   def visible_root_folder
-    self.errors.add(:visible, :archived_root) if self.visible_changed? && self.archived?
+    errors.add(:visible, :archived_root) if visible_changed? && archived?
   end
 end

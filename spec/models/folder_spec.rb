@@ -45,12 +45,13 @@ describe Folder do
       end
     end
 
-    context 'root/child_of' do
+    context 'root/not_root/child_of' do
       it 'should properly check ancestor folders' do
         root_folder = create(:root_folder)
         folder2 = create(:folder, :parent_folder => root_folder)
         folder3 = create(:folder, :parent_folder => folder2)
         expect(described_class.root.pluck(:id)).to eq([root_folder.id])
+        expect(described_class.not_root.pluck(:id)).to eq([folder2.id, folder3.id])
         expect(described_class.child_of(nil).pluck(:id)).to eq([root_folder.id])
         expect(described_class.child_of(root_folder.id).pluck(:id)).to eq([folder2.id])
         expect(described_class.child_of(folder2.id).pluck(:id)).to eq([folder3.id])

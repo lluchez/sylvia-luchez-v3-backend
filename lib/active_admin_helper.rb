@@ -1,3 +1,4 @@
+# Helper for activeadmin forms and pages
 class ActiveAdminHelper
   class << self
     # YES_NO_COLLECTION = [[true.humanize, true], [false.humanize, false]].freeze
@@ -10,8 +11,8 @@ class ActiveAdminHelper
     #   hash.map { |k,v| [v,k] }
     # end
 
-    def folder_collection(id: nil)
-      model_collection(Folder, :id => id)
+    def folder_collection(id: nil, include_root: true)
+      model_collection(include_root ? Folder : Folder.not_root, :id => id)
     end
 
     # This function offers two ways to custom displayed text:

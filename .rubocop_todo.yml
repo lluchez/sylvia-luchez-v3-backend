@@ -99,7 +99,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 79
+  Max: 100
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
@@ -143,7 +143,6 @@ Style/Documentation:
     - 'spec/**/*'
     - 'test/**/*'
     - 'app/controllers/home_controller.rb'
-    - 'app/helpers/active_admin_helper.rb'
     - 'app/helpers/application_helper.rb'
     - 'app/models/application_record.rb'
 
