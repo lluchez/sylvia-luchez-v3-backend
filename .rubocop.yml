@@ -5,3 +5,12 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'app/admin/**/*'
+  Max: 80

@@ -4,4 +4,14 @@ Rails.application.routes.draw do
 
   root :to => 'home#index'
   get "/health" => "home#health"
+
+  namespace :api do
+    namespace :v1 do
+      resources :folders, :only => [:show] do
+      end
+      # get 'folders/root' => 'folders#root', :as => 'folders_root'
+      get 'root_folder' => 'folders#root', :as => 'root_folder'
+      resources :projects, :only => [:show]
+    end
+  end
 end

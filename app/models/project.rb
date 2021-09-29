@@ -48,10 +48,10 @@ class Project < ApplicationRecord
   end
 
   def sized_photo(size)
-    photo.variant(self.class.sizes[size]).processed
+    photo.variant(self.class.sizes[size]).processed if photo.persisted?
   end
 
   def sold?
-    purchased_at.present?
+    purchased_at.present? || purchased_by.present?
   end
 end
