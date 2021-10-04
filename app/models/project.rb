@@ -7,6 +7,7 @@
 #  height       :decimal(10, )
 #  medium       :string(255)
 #  name         :string(255)      not null
+#  order        :bigint           default(0), not null
 #  purchased_at :date
 #  purchased_by :string(255)
 #  visible      :boolean          default(TRUE), not null
@@ -24,6 +25,7 @@
 #
 class Project < ApplicationRecord
   include Archiveable
+  include Orderable
   audited
 
   scope :child_of, ->(folder_id) { where(:folder_id => folder_id) }
@@ -53,5 +55,10 @@ class Project < ApplicationRecord
 
   def sold?
     purchased_at.present? || purchased_by.present?
+  end
+
+  # override the behavior from Orderable
+  def default_order_value
+    folder&.projects&.maximum(:order)
   end
 end

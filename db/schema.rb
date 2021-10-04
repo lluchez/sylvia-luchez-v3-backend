@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_194033) do
+ActiveRecord::Schema.define(version: 2021_10_04_024255) do
 
   create_table "active_admin_comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_09_25_194033) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "root"
+    t.bigint "order", default: 0, null: false
     t.index ["parent_folder_id"], name: "index_folders_on_parent_folder_id"
     t.index ["root"], name: "index_folders_on_root", unique: true
   end
@@ -143,6 +144,7 @@ ActiveRecord::Schema.define(version: 2021_09_25_194033) do
     t.string "purchased_by"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "order", default: 0, null: false
     t.index ["folder_id"], name: "index_projects_on_folder_id"
     t.index ["medium"], name: "index_projects_on_medium"
     t.index ["purchased_at"], name: "index_projects_on_purchased_at"

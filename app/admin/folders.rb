@@ -1,6 +1,6 @@
 ActiveAdmin.register Folder do
   actions :all, :except => [:destroy]
-  permit_params :name, :from_year, :to_year, :parent_folder_id, :visible
+  permit_params :name, :from_year, :to_year, :parent_folder_id, :visible, :order
 
   controller do
     def scoped_collection
@@ -47,6 +47,7 @@ ActiveAdmin.register Folder do
         folder.projects.count
       end
       row :visible
+      row :order
       row :created_at
       row :updated_at
     end
@@ -64,6 +65,7 @@ ActiveAdmin.register Folder do
         f.input :from_year
         f.input :to_year
         f.input :parent_folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection
+        f.input :order
         f.input :visible
       end
     end

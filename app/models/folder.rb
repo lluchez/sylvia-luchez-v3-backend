@@ -5,6 +5,7 @@
 #  id               :bigint           not null, primary key
 #  from_year        :integer
 #  name             :string(255)      not null
+#  order            :bigint           default(0), not null
 #  root             :boolean
 #  to_year          :integer
 #  visible          :boolean          default(TRUE), not null
@@ -19,6 +20,7 @@
 #
 class Folder < ApplicationRecord
   include Archiveable
+  include Orderable
   audited
 
   scope :root, -> { where(:root => true) }
@@ -29,9 +31,9 @@ class Folder < ApplicationRecord
     root.last
   end
 
-  has_many :projects
+  has_many :projects, -> { order(:order => :desc, :id => :desc) }
   belongs_to :parent_folder, :class_name => 'Folder', :optional => true
-  has_many :sub_folders, :foreign_key => :parent_folder_id, :class_name => 'Folder'
+  has_many :sub_folders, -> { order(:order => :desc, :id => :desc) }, :foreign_key => :parent_folder_id, :class_name => 'Folder'
 
   validates_presence_of :name
 

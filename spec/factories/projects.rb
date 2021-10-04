@@ -7,6 +7,7 @@
 #  height       :decimal(10, )
 #  medium       :string(255)
 #  name         :string(255)      not null
+#  order        :bigint           default(0), not null
 #  purchased_at :date
 #  purchased_by :string(255)
 #  visible      :boolean          default(TRUE), not null

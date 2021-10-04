@@ -15,3 +15,8 @@ git push -f prod main:master
 heroku run -r stage rake db:migrate
 heroku run -r prod rake db:migrate
 ```
+
+
+## Tips
+
+Use `byebug` to set a break point

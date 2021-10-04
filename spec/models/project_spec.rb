@@ -7,6 +7,7 @@
 #  height       :decimal(10, )
 #  medium       :string(255)
 #  name         :string(255)      not null
+#  order        :bigint           default(0), not null
 #  purchased_at :date
 #  purchased_by :string(255)
 #  visible      :boolean          default(TRUE), not null
@@ -116,6 +117,36 @@ describe Project do
         project = build(:project, :folder => other_folder)
         expect(project.valid?).to eq(true)
         expect(project.folder).to eq(other_folder)
+      end
+    end
+  end
+
+  describe '#default_order_value' do
+    context 'project is assigned' do
+      it 'should predict the correct value for `order` based on other projects within this folder' do
+        root_folder = create(:root_folder)
+
+        other_folder = create(:folder, :parent_folder => root_folder)
+        expect(create(:project, :folder => other_folder, :order => 99).order).to eq(99)
+
+        expect(create(:project, :folder => root_folder, :order => nil).order).to eq(1)
+        expect(create(:project, :folder => root_folder, :order => nil).order).to eq(2)
+        expect(create(:project, :folder => root_folder, :order => 8).order).to eq(8)
+        expect(create(:project, :folder => root_folder, :order => nil).order).to eq(9)
+        expect(create(:project, :folder => root_folder, :order => 3).order).to eq(3)
+      end
+    end
+
+    context 'project is not assigned' do
+      it 'should look at the root folder' do
+        root_folder = create(:root_folder)
+        other_folder = create(:folder, :parent_folder => root_folder)
+        create(:project, :folder => root_folder, :order => 10)
+        create(:project, :folder => other_folder, :order => 12)
+
+        project = create(:project, :folder => nil, :order => nil)
+        expect(project.folder).to eq(root_folder)
+        expect(project.order).to eq(11)
       end
     end
   end

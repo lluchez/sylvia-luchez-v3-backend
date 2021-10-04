@@ -1,7 +1,8 @@
 ActiveAdmin.register Project do
   actions :all, :except => [:destroy]
   permit_params :name, :folder_id, :visible, :year, :medium, :photo,
-                :width, :height, :depth, :purchased_at, :purchased_by
+                :width, :height, :depth, :purchased_at, :purchased_by,
+                :order
 
   controller do
     def scoped_collection
@@ -49,6 +50,7 @@ ActiveAdmin.register Project do
       end
       row :year
       row :medium
+      row :order
       row :visible
       row :created_at
       row :updated_at
@@ -79,6 +81,7 @@ ActiveAdmin.register Project do
       f.input :photo, :as => :file
       f.input :year
       f.input :medium
+      f.input :order
       f.input :visible
     end
     f.inputs do

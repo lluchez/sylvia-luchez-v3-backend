@@ -5,6 +5,7 @@
 #  id               :bigint           not null, primary key
 #  from_year        :integer
 #  name             :string(255)      not null
+#  order            :bigint           default(0), not null
 #  root             :boolean
 #  to_year          :integer
 #  visible          :boolean          default(TRUE), not null

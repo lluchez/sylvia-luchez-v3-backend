@@ -3,6 +3,79 @@ require 'rails_helper'
 RSpec.describe Api::V1::FoldersController, :type => :controller do
   render_views
 
+  let(:root_folder) do
+    create(:root_folder, {
+      :name => 'Home Folder',
+      :visible => true,
+      :from_year => 2001,
+      :to_year => 2019
+    })
+  end
+
+  let(:project) do
+    create(:project, {
+      :name => 'Test Project',
+      :visible => true,
+      :folder => root_folder,
+      :order => 99
+    })
+  end
+
+  let(:project2) do
+    create(:project, {
+      :name => 'Test Project 2',
+      :visible => true,
+      :folder => root_folder,
+      :order => 11
+    })
+  end
+
+  let(:hidden_sub_folder) do
+    create(:folder, {
+      :name => 'Hidden Sub Folder',
+      :visible => false,
+      :parent_folder => root_folder
+    })
+  end
+
+  let(:sub_folder) do
+    create(:folder, {
+      :name => 'Sub Folder',
+      :visible => true,
+      :from_year => 2003,
+      :to_year => 2020,
+      :parent_folder => root_folder,
+      :order => 99
+    })
+  end
+
+  let(:sub_folder2) do
+    create(:folder, {
+      :name => 'Sub Folder 2',
+      :visible => true,
+      :from_year => 2001,
+      :to_year => 2019,
+      :parent_folder => root_folder,
+      :order => 11
+    })
+  end
+
+  let(:sub_sub_folder) do
+    create(:folder, {
+      :name => 'Sub Sub Folder',
+      :visible => true,
+      :parent_folder => sub_folder
+    })
+  end
+
+  let(:hidden_sub_project) do
+    create(:project, {
+      :name => 'Hidden Sub Project',
+      :visible => false,
+      :folder => sub_folder
+    })
+  end
+
   describe "GET #show" do
     context 'for an non existing folder' do
       it "should return a 404 response" do
@@ -16,39 +89,7 @@ RSpec.describe Api::V1::FoldersController, :type => :controller do
 
     context 'for an existing folder' do
       it "it should return all serialized attributes" do
-        root_folder = create(:root_folder, {
-          :name => 'Home Folder',
-          :visible => true,
-          :from_year => 2001,
-          :to_year => 2019
-        })
-        project = create(:project, {
-          :name => 'Test Project',
-          :visible => true,
-          :folder => root_folder
-        })
-        create(:folder, {
-          :name => 'Hidden Sub Folder',
-          :visible => false,
-          :parent_folder => root_folder
-        })
-        sub_folder = create(:folder, {
-          :name => 'Sub Folder',
-          :visible => true,
-          :from_year => 2003,
-          :to_year => 2020,
-          :parent_folder => root_folder
-        })
-        sub_sub_folder = create(:folder, {
-          :name => 'Sub Sub Folder',
-          :visible => true,
-          :parent_folder => sub_folder
-        })
-        create(:project, {
-          :name => 'Hidden Sub Project',
-          :visible => false,
-          :folder => sub_folder
-        })
+        _objs = [root_folder, project, project2, hidden_sub_folder, sub_folder, sub_folder2, sub_sub_folder, hidden_sub_project]
 
         # querying the root folder
         get :show, :params => { :id => root_folder.id }, :format => :json
@@ -67,14 +108,18 @@ RSpec.describe Api::V1::FoldersController, :type => :controller do
         expect(data['root']).to eq(true)
         expect(par_folders).to eq(nil)
         expect(sub_folders.class).to eq(Array)
-        expect(sub_folders.count).to eq(1)
+        expect(sub_folders.count).to eq(2)
         expect(sub_folders.first['folder']['id']).to eq(sub_folder.id)
         expect(sub_folders.first['folder']['name']).to eq('Sub Folder')
         expect(sub_folders.first['folder']['sub_folders']).to eq(nil)
+        expect(sub_folders.second['folder']['id']).to eq(sub_folder2.id)
+        expect(sub_folders.second['folder']['name']).to eq('Sub Folder 2')
         expect(projects.class).to eq(Array)
-        expect(projects.count).to eq(1)
+        expect(projects.count).to eq(2)
         expect(projects.first['project']['id']).to eq(project.id)
         expect(projects.first['project']['name']).to eq('Test Project')
+        expect(projects.second['project']['id']).to eq(project2.id)
+        expect(projects.second['project']['name']).to eq('Test Project 2')
 
         # querying the sub folder
         get :show, :params => { :id => sub_folder.id }, :format => :json
@@ -117,29 +162,7 @@ RSpec.describe Api::V1::FoldersController, :type => :controller do
 
     context 'for an existing root folder' do
       it "it should return all serialized attributes" do
-        root_folder = create(:root_folder, {
-          :name => 'Home Folder',
-          :visible => true,
-          :from_year => 2001,
-          :to_year => 2019
-        })
-        project = create(:project, {
-          :name => 'Test Project',
-          :visible => true,
-          :folder => root_folder
-        })
-        create(:folder, {
-          :name => 'Hidden Sub Folder',
-          :visible => false,
-          :parent_folder => root_folder
-        })
-        sub_folder = create(:folder, {
-          :name => 'Sub Folder',
-          :visible => true,
-          :from_year => 2003,
-          :to_year => 2020,
-          :parent_folder => root_folder
-        })
+        _objs = [root_folder, project, hidden_sub_folder, sub_folder]
 
         # querying the root folder
         get :root, :format => :json
