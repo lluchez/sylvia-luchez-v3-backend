@@ -32,6 +32,10 @@ ActiveAdmin.register Folder do
   filter :parent_folder, :as => :select, :collection => proc { ActiveAdminHelper.folder_collection }
   filter :created_at
 
+  action_item :new_folder, :only => :show do
+    link_to('New Folder', new_admin_folder_path)
+  end
+
   show do |f|
     attributes_table do
       row :name

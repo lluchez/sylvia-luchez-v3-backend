@@ -41,6 +41,10 @@ ActiveAdmin.register Project do
   filter :medium, :as => :select, :collection => proc { ActiveAdminHelper.unique_field_collection(Project, :medium) }
   filter :created_at
 
+  action_item :new_project, :only => :show do
+    link_to('New Project', new_admin_project_path)
+  end
+
   show do
     attributes_table :title => 'Project Details' do
       row :name
