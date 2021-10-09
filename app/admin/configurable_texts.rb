@@ -3,6 +3,10 @@ ActiveAdmin.register ConfigurableText do
   menu :label => "Texts"
   permit_params :value
 
+  filter :name
+  filter :code
+  filter :created_at
+
   index do
     # selectable_column
     id_column
