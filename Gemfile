@@ -5,6 +5,7 @@ ruby '2.7.3'
 
 gem 'aws-sdk-s3', :require => false
 gem 'activeadmin'
+gem 'activeadmin_quill_editor'
 gem 'audited'
 gem 'bootsnap', '>= 1.4.4', :require => false
 gem 'delayed_job_active_record'

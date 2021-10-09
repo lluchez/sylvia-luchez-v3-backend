@@ -7,11 +7,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :folders, :only => [:show] do
-      end
-      # get 'folders/root' => 'folders#root', :as => 'folders_root'
+      resources :folders, :only => [:show]
       get 'root_folder' => 'folders#root', :as => 'root_folder'
       resources :projects, :only => [:show]
+      get 'texts/:code' => 'configurable_texts#show', :as => 'text'
     end
   end
 end

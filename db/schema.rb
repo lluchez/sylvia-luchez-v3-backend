@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_024255) do
+ActiveRecord::Schema.define(version: 2021_10_05_134030) do
 
   create_table "active_admin_comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -100,6 +100,18 @@ ActiveRecord::Schema.define(version: 2021_10_04_024255) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "configurable_texts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.text "value", null: false
+    t.string "format", default: "text", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code"], name: "index_configurable_texts_on_code", unique: true
+    t.index ["format"], name: "index_configurable_texts_on_format"
+    t.index ["name"], name: "index_configurable_texts_on_name", unique: true
   end
 
   create_table "delayed_jobs", charset: "utf8mb4", force: :cascade do |t|
