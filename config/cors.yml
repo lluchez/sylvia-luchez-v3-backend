@@ -1,0 +1,11 @@
+development:
+  origins: '*'
+
+stage:
+  origins: "<%= ENV['CORS_ORIGINS'].presence || 'localhost:8080' %>"
+
+production:
+  origins: "<%= ENV['CORS_ORIGINS'].presence || 'sylvialuchez.com' %>"
+
+test:
+  origins: '*'
