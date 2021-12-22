@@ -202,6 +202,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-attack (6.5.0)
+      rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-mini-profiler (2.3.2)
@@ -367,6 +369,7 @@ DEPENDENCIES
   listen (~> 3.3)
   mysql2 (~> 0.5)
   puma (~> 5.0)
+  rack-attack
   rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4.1)
