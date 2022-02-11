@@ -14,3 +14,6 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'app/admin/**/*'
   Max: 80
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
