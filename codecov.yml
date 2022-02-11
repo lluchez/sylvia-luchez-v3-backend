@@ -8,8 +8,9 @@ coverage:
         threshold: "0.1%"
 
   ignore:
-    - spec/.*
+    - .github/.*
     - app/assets/.*
     - app/views/.*
     - public/.*
+    - spec/.*
     - vendor/.*

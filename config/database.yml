@@ -24,11 +24,12 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+
 test:
   <<: *default
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: <%= ENV.fetch("DB_USER") { 'root' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { '' } %>
+  socket: <%= ENV["DB_USER"] || ENV["DATABASE_URL"] ? nil : '/tmp/mysql.sock' %>
   database: sylvia_luchez_v3_backend_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -58,6 +59,3 @@ stage:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  # database: sylvia_luchez_v3_backend_production
-  # username: sylvia_luchez_v3_backend
-  # password: <%= ENV['SYLVIA_LUCHEZ_V3_BACKEND_DATABASE_PASSWORD'] %>
