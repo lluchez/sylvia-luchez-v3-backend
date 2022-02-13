@@ -17,3 +17,6 @@ Metrics/BlockLength:
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+
+Style/RegexpLiteral:
+  Enabled: false

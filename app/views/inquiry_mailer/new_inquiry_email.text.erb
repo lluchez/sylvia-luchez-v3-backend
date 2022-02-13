@@ -1,0 +1,15 @@
+Hi Sylvia,
+
+You received an email from <%= @params[:name] %> who reached out to you from your Website. More details below:
+
+Contact Details
+---------------
+Name: <%= @params[:name] %>
+Email: <%= @params[:email] %>
+Phone: <%= number_to_phone(@params[:phone]) %>
+
+Message Details
+---------------
+Subject: <%= @params[:subject] %>
+Message:
+<%= @params[:message] %>

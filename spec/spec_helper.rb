@@ -43,6 +43,13 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+
+    if described_class < ActionMailer::Base
+      # when testing mailers, initialize ActionMailer with these default settings
+      ActionMailer::Base.delivery_method = :test
+      ActionMailer::Base.perform_deliveries = true
+      ActionMailer::Base.deliveries.clear
+    end
   end
 
   config.after(:each) do
@@ -128,4 +135,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+def retrieve_html_body_part(mail)
+  mail.parts.last.body.raw_source.gsub(/\s+/, ' ').split(/<\/?body>/).second.strip
 end

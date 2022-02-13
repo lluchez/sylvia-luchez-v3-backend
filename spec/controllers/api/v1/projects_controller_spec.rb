@@ -10,7 +10,14 @@ RSpec.describe Api::V1::ProjectsController, :type => :controller do
         expect(response.status).to eq(404)
 
         data = JSON.parse(response.body)
-        expect(data['error']).to eq('not_found')
+        expect(data['message']).to eq('Not found')
+      end
+
+      it "should return a 404 response" do
+        get :show, :params => { :id => 99_999 }
+        expect(response.status).to eq(404)
+
+        expect(response.body).to eq('')
       end
     end
 

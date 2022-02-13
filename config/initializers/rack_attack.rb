@@ -19,5 +19,11 @@ class Rack::Attack
         req.ip
       end
     end
+
+    throttle('req/ip/api/emails', :limit => 5, :period => 1.hours) do |req|
+      if req.path.starts_with?('/api/v1/emails')
+        req.ip
+      end
+    end
   end
 end

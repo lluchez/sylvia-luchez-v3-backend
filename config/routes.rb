@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'root_folder' => 'folders#root', :as => 'root_folder'
       resources :projects, :only => [:show]
       get 'texts/:code' => 'configurable_texts#show', :as => 'text'
+      resources :emails, :only => [:create]
     end
   end
 end
