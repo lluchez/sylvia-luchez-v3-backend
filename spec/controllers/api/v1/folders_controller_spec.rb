@@ -83,7 +83,7 @@ RSpec.describe Api::V1::FoldersController, :type => :controller do
         expect(response.status).to eq(404)
 
         data = JSON.parse(response.body)
-        expect(data['error']).to eq('not_found')
+        expect(data['message']).to eq('Not found')
       end
     end
 
@@ -156,7 +156,7 @@ RSpec.describe Api::V1::FoldersController, :type => :controller do
         expect(response.status).to eq(404)
 
         data = JSON.parse(response.body)
-        expect(data['error']).to eq('not_found')
+        expect(data['message']).to eq('Not found')
       end
     end
 

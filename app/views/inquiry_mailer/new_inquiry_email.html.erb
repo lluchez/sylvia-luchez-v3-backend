@@ -1,0 +1,14 @@
+<div>
+  <p>Hi Sylvia,</p>
+  <p>You received an email from <%= @params[:name] %> who reached out to you from your Website. More details below:</p>
+
+  <h3>Contact Details</h3>
+  <p>Name: <%= @params[:name] %></p>
+  <p>Email: <%= @params[:email] %></p>
+  <p>Phone: <%= number_to_phone(@params[:phone]) %></p>
+
+  <h3>Message Details</h3>
+  <p>Subject: <%= @params[:subject] %></p>
+  <p>Message:</p>
+  <p><%= @params[:message] %></p>
+</div>

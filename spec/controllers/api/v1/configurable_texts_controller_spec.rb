@@ -10,7 +10,7 @@ RSpec.describe Api::V1::ConfigurableTextsController, :type => :controller do
         expect(response.status).to eq(404)
 
         data = JSON.parse(response.body)
-        expect(data['error']).to eq('not_found')
+        expect(data['message']).to eq('Not found')
       end
     end
 

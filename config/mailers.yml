@@ -1,0 +1,5 @@
+any:
+  artist: <%= ENV['SMTP_USERNAME'] %>
+
+test:
+  artist: artist@biz.foo

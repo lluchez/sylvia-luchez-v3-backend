@@ -94,6 +94,8 @@ Lint/UnusedBlockArgument:
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
   Max: 18
+  Exclude:
+    - 'app/controllers/api/v1/emails_controller.rb'
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
