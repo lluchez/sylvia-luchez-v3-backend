@@ -14,28 +14,14 @@ class Api::V1::EmailsController < Api::V1::BaseController
   protected
 
   def render_email_sent_response
-    respond_to do |format|
-      format.json do
-        render :json => { :message => 'Message was successfully sent!' }, :status => :ok
-      end
-      format.any do
-        head :ok, :status => :ok
-      end
-    end
+    render :json => { :message => 'Message was successfully sent!' }, :status => :ok
   end
 
   def render_sending_email_error_response(exception)
-    respond_to do |format|
-      format.json do
-        render :json => {
-          :message => 'Unable to send the message',
-          :reason => exception.message
-        }, :status => :internal_server_error
-      end
-      format.any do
-        render :plain => 'Unable to send the message', :status => :internal_server_error
-      end
-    end
+    render :json => {
+      :message => 'Unable to send the message',
+      :reason => exception.message
+    }, :status => :internal_server_error
   end
 
   def email_failure_rollbar(exception)
