@@ -6,18 +6,11 @@ RSpec.describe Api::V1::ProjectsController, :type => :controller do
   describe "GET #show" do
     context 'for an non existing project' do
       it "should return a 404 response" do
-        get :show, :params => { :id => 99_999 }, :format => :json
+        get :show, :params => { :id => 99_999 } # , :format => :json
         expect(response.status).to eq(404)
 
         data = JSON.parse(response.body)
         expect(data['message']).to eq('Not found')
-      end
-
-      it "should return a 404 response" do
-        get :show, :params => { :id => 99_999 }
-        expect(response.status).to eq(404)
-
-        expect(response.body).to eq('')
       end
     end
 
@@ -32,7 +25,7 @@ RSpec.describe Api::V1::ProjectsController, :type => :controller do
           :height => 20,
           :depth => 5
         })
-        get :show, :params => { :id => project.id }, :format => :json
+        get :show, :params => { :id => project.id } # , :format => :json
         expect(response).to be_successful
 
         data = JSON.parse(response.body)['project']
@@ -54,7 +47,7 @@ RSpec.describe Api::V1::ProjectsController, :type => :controller do
           :purchased_at => Date.new(2011, 1, 30)
         )
 
-        get :show, :params => { :id => project.id }, :format => :json
+        get :show, :params => { :id => project.id } # , :format => :json
         expect(response).to be_successful
 
         data = JSON.parse(response.body)['project']

@@ -1,5 +1,7 @@
 # http://www.railsstatuscodes.com/
 class Api::V1::BaseController < ApplicationController
+  before_action :set_default_response_format
+
   rescue_from ActiveRecord::RecordNotFound do |_exception|
     not_found
   end
@@ -11,30 +13,20 @@ class Api::V1::BaseController < ApplicationController
   protected
 
   def not_found
-    respond_to do |format|
-      format.json do
-        render :json => {
-          :message => 'Not found'
-        }, :status => :not_found
-      end
-      format.any do
-        head :not_found, :status => :not_found
-      end
-    end
+    render :json => {
+      :message => 'Not found'
+    }, :status => :not_found
   end
 
   def invalid(err)
-    respond_to do |format|
-      format.json do
-        render :json => {
-          :message => err.message,
-          :field => err.field,
-          :value => err.value
-        }, :status => :unprocessable_entity
-      end
-      format.any do
-        render :plain => "#{err.message}\nField: #{err.field}\nValue: #{err.value}", :status => :unprocessable_entity
-      end
-    end
+    render :json => {
+      :message => err.message,
+      :field => err.field,
+      :value => err.value
+    }, :status => :unprocessable_entity
+  end
+
+  def set_default_response_format
+    request.format = :json
   end
 end
