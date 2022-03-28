@@ -25,3 +25,4 @@ Use `byebug` to set a break point
 ## To do
 - Update CORS origins
 - Update github actions to run Rubocop
+- [DEPRECATION] Rack::Attack.throttled_response is deprecated. Please use Rack::Attack.throttled_responder instead
