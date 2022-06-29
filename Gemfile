@@ -1,22 +1,22 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.5'
+ruby '3.0.4'
 
-gem 'aws-sdk-s3', :require => false
+gem 'aws-sdk-s3'
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
 gem 'audited'
-gem 'bootsnap', '>= 1.4.4', :require => false
+gem 'bootsnap', '>= 1.4.4'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'image_processing'
 gem 'jbuilder', '~> 2.7'
 gem 'mysql2', '~> 0.5'
-gem 'puma', '~> 5.6'
+gem 'puma'
 gem 'rack-attack'
 gem 'rack-cors'
-gem 'rails', '~> 6.1'
+gem 'rails' #, '~> 6.1'
 gem 'rollbar'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
@@ -35,13 +35,8 @@ group :development, :test do
   gem 'byebug', :platforms => [:mri, :mingw, :x64_mingw]
 
   # gem 'active_record_query_trace'
-  # gem 'pry'
-  # gem 'pry-nav'
-  # gem 'pry-rails'
-  # gem 'pry-rescue'
-  # gem 'pry-stack_explorer'
-  # # gem 'selenium-webdriver'
-  # # gem 'simple_xlsx_reader'
+  # gem 'selenium-webdriver'
+  # gem 'simple_xlsx_reader'
   # gem 'timecop'
 end
 
