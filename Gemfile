@@ -13,7 +13,7 @@ gem 'devise'
 gem 'image_processing'
 gem 'jbuilder', '~> 2.7'
 gem 'mysql2', '~> 0.5'
-gem 'puma', '~> 5.0', groups: [:development, :test]
+gem 'puma' #, '~> 5.0', groups: [:development, :test]
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'rails' #, '~> 6.1'
