@@ -392,7 +392,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mysql2 (~> 0.5)
-  puma
+  puma (~> 5.0)
   rack-attack
   rack-cors
   rack-mini-profiler (~> 2.0)
