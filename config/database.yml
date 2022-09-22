@@ -16,10 +16,13 @@ default: &default
 
 development:
   <<: *default
+  # host: 127.0.0.1
   username: root
   password:
-  socket: /tmp/mysql.sock
+  # socket: /mysql_socket/mysqld.sock
+  # socket: /tmp/mysql.sock
   database: sylvia_luchez_v3_backend_development
+  port: 33070
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
