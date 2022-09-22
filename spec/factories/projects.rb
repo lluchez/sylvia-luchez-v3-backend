@@ -34,7 +34,7 @@ FactoryBot.define do
     depth { nil }
 
     trait :sold do
-      purchased_at { Faker::Date.between(:from => 5.years.ago, :to => Date.today) }
+      purchased_at { Faker::Date.backward(:days => 15) }
       purchased_by { Faker::Name }
     end
   end

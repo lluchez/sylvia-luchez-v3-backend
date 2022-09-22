@@ -24,6 +24,7 @@
 #  index_projects_on_purchased_at  (purchased_at)
 #
 require 'rails_helper'
+require 'date'
 
 describe Project do
   describe 'relationships' do
@@ -74,7 +75,7 @@ describe Project do
   describe '#sold?' do
     context 'when purchased date is set' do
       it 'should return true' do
-        expect(create(:project, :purchased_at => Date.today).sold?).to eq(true)
+        expect(create(:project, :purchased_at => Faker::Date::backward(:days => 10)).sold?).to eq(true)
       end
     end
 
