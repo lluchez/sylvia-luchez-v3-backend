@@ -82,7 +82,10 @@ ActiveAdmin.register Project do
     f.inputs do
       f.input :name, :required => true
       f.input :folder_id, :as => :select, :collection => ActiveAdminHelper.folder_collection
-      f.input :photo, :as => :file
+      f.input :photo, :as => :file, :required => true
+      if f.object.photo.persisted?
+        f.li "<div style='padding-left: 20%;'><img src='#{url_for(project.sized_photo(:thumbnail))}'' /></div>".html_safe
+      end
       f.input :year
       f.input :medium
       f.input :order

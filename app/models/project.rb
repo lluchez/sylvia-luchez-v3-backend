@@ -35,7 +35,7 @@ class Project < ApplicationRecord
   belongs_to :folder
   has_one_attached :photo
 
-  validates_presence_of :name, :folder
+  validates_presence_of :name, :folder, :photo
 
   before_validation do |p|
     p.purchased_by = p.purchased_by.presence
