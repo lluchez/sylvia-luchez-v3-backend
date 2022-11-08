@@ -26,9 +26,9 @@ class Rack::Attack
       end
     end
 
-    self.throttled_response = lambda do |env|
+    self.throttled_responder = lambda do |request|
       now = Time.now
-      match_data = env['rack.attack.match_data']
+      match_data = request.env['rack.attack.match_data']
 
       headers = {
         'X-RateLimit-Limit' => match_data[:limit].to_s,
@@ -37,7 +37,7 @@ class Rack::Attack
         'Content-Type' => 'application/json'
       }
 
-      return [429, headers, ['{"message": "Too Many Requests. Retry Later."}']]
+      [429, headers, ['{"message": "Too Many Requests. Retry Later."}']]
     end
   end
 end
