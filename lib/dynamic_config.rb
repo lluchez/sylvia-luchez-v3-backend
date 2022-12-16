@@ -36,8 +36,9 @@ class DynamicConfig
 
     def write_config_accessor_for(meth)
       instance_eval <<-RUBY, __FILE__, __LINE__ + 1
-        def #{meth}
-          @#{meth} ||= parse_config_file_with_env('#{meth}.yml')
+        def #{meth}                                              # def mailers
+          @#{meth} ||= parse_config_file_with_env('#{meth}.yml') #   @mailers ||= parse_config_file_with_env('mailers.yml')
+                                                                 # end
         end
       RUBY
     end
