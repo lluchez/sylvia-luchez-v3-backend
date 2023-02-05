@@ -5,6 +5,16 @@ json.url api_v1_folder_path(folder)
 if folder.root?
   json.extract! folder, :root
 else
+  if folder.photo.persisted?
+    json.photo do
+      json.large do
+        json.url url_for(folder.sized_photo(:large))
+      end
+      json.thumb do
+        json.url url_for(folder.sized_photo(:thumbnail))
+      end
+    end
+  end
   json.parent_folder do
     json.id folder.parent_folder_id
     json.url api_v1_folder_path(folder.parent_folder_id)

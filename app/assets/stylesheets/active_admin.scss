@@ -18,12 +18,13 @@
 //
 //   .status_tag { background: #6090DB; }
 
-#index_table_projects {
+
+#index_table_projects, #index_table_folders {
   td {
     vertical-align: middle;
     &.col-image {
       text-align: center;
-      .project-thumbnail {
+      .folder-thumbnail, .project-thumbnail {
         height: 50px;
       }
     }

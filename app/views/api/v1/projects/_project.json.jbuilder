@@ -2,6 +2,11 @@
 json.extract! project, :id, :name, :visible, :medium, :year
 json.url api_v1_project_path(project)
 
+json.folder do
+  json.extract! project.folder, :id, :name
+  json.url api_v1_folder_path(project.folder)
+end
+
 json.dimension do
   json.extract! project, :width, :height, :depth
 end
