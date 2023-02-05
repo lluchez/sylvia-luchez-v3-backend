@@ -35,6 +35,8 @@ class Folder < ApplicationRecord
   belongs_to :parent_folder, :class_name => 'Folder', :optional => true
   has_many :sub_folders, -> { order(:order => :desc, :id => :desc) }, :foreign_key => :parent_folder_id, :class_name => 'Folder'
 
+  has_one_attached :photo
+
   validates_presence_of :name
 
   before_validation do |f|
@@ -43,6 +45,17 @@ class Folder < ApplicationRecord
 
   validate :root_attribute_wont_change, :if => proc { |f| f.root_was }
   validate :visible_root_folder, :if => proc { |f| f.root? }
+
+  def self.sizes
+    {
+      :thumbnail => { :resize_to_fit => [400, 250] },
+      :large => { :resize_to_fit => [1200, 1200] }
+    }
+  end
+
+  def sized_photo(size)
+    photo.variant(self.class.sizes[size]).processed if photo.persisted?
+  end
 
   def root_attribute_wont_change
     errors.add(:root, :cant_change_root) if persisted? && root_changed?

@@ -50,7 +50,7 @@ ActiveAdmin.register Project do
       row :name
       row :folder
       row :photo do |project|
-        render :partial => 'admin/photo', :locals => { :project => project }
+        render :partial => 'admin/photo', :locals => { :resource => project }
       end
       row :year
       row :medium
