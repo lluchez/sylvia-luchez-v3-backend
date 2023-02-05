@@ -18,5 +18,7 @@ module SylviaLuchezV3Backend
     #
     # config.time_zone = "Central Time (US & Canada)"
     config.eager_load_paths << Rails.root.join("lib")
+
+    config.active_record.use_yaml_unsafe_load = true
   end
 end
