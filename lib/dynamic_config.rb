@@ -10,7 +10,7 @@ class DynamicConfig
     # SsmConfig.config_name. For example, if you wish to access config/foo.yml,
     # just call SsmConfig.foo from anywhere in the app. The YAML will be parsed
     # into a hash.
-    def method_missing(meth, *args, &block)
+    def method_missing(meth, *args, &)
       if yml_file_exists?(meth)
         write_config_accessor_for(meth)
         send(meth)

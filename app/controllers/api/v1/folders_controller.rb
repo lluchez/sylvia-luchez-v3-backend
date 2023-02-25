@@ -10,6 +10,6 @@ class Api::V1::FoldersController < Api::V1::BaseController
   private
 
   def folder_base_query
-    Folder.includes(:sub_folders => {:photo_attachment => :blob}, :projects => { :photo_attachment => :blob })
+    Folder.includes(:sub_folders => { :photo_attachment => :blob }, :projects => { :photo_attachment => :blob })
   end
 end
