@@ -13,7 +13,7 @@ ActiveAdmin.register Folder do
   end
 
   index do
-    # selectable_column
+    selectable_column
     id_column
     column :name
     column :parent_folder
