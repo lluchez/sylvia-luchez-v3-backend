@@ -2,11 +2,16 @@
 
 ## Commands
 
+Run the following command first for authentication:
+
+```
+heroku login
+```
+
 ### Push
 
 ```
-git push -f stage $(git branch --show-current):master # pushing the current branch
-git push -f stage <branch>:master
+git push -f stage $(git branch --show-current):master
 git push -f prod main:master
 ```
 
