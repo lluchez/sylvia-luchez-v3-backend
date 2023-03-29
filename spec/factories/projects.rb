@@ -8,6 +8,7 @@
 #  medium       :string(255)
 #  name         :string(255)      not null
 #  order        :bigint           default(0), not null
+#  price        :decimal(10, 2)
 #  purchased_at :date
 #  purchased_by :string(255)
 #  visible      :boolean          default(TRUE), not null
