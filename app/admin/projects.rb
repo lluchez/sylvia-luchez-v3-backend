@@ -2,7 +2,7 @@ ActiveAdmin.register Project do
   actions :all, :except => [:destroy]
   permit_params :name, :folder_id, :visible, :year, :medium, :photo,
                 :width, :height, :depth, :purchased_at, :purchased_by,
-                :order
+                :order, :price
 
   controller do
     def scoped_collection
@@ -24,6 +24,7 @@ ActiveAdmin.register Project do
     end
     column :year
     column :medium
+    column :price
     column :visible
     column :created_at do |p|
       p.created_at.to_date
@@ -34,11 +35,14 @@ ActiveAdmin.register Project do
   scope :all
   scope :visible, :default => true, &:visible
   scope :archived, &:archived
+  scope :not_priced, &:not_priced
 
   filter :name
   filter :folder, :as => :select, :collection => proc { ActiveAdminHelper.folder_collection }
   filter :year
   filter :medium, :as => :select, :collection => proc { ActiveAdminHelper.unique_field_collection(Project, :medium) }
+  filter :price
+  filter :visible
   filter :created_at
 
   action_item :new_project, :only => :show do
@@ -54,8 +58,9 @@ ActiveAdmin.register Project do
       end
       row :year
       row :medium
-      row :order
+      row :price
       row :visible
+      row :order
       row :created_at
       row :updated_at
     end
@@ -85,8 +90,9 @@ ActiveAdmin.register Project do
       f.input :photo, :as => :file
       f.input :year
       f.input :medium
-      f.input :order
+      f.input :price
       f.input :visible
+      f.input :order
     end
     f.inputs do
       f.input :width

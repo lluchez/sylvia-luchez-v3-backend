@@ -8,6 +8,7 @@
 #  medium       :string(255)
 #  name         :string(255)      not null
 #  order        :bigint           default(0), not null
+#  price        :decimal(10, 2)
 #  purchased_at :date
 #  purchased_by :string(255)
 #  visible      :boolean          default(TRUE), not null
@@ -31,6 +32,8 @@ class Project < ApplicationRecord
   scope :child_of, ->(folder_id) { where(:folder_id => folder_id) }
   scope :sold, -> { where.not(:purchased_at => nil) }
   scope :not_sold, -> { where(:purchased_at => nil) }
+  scope :priced, -> { where.not(:price => nil) }
+  scope :not_priced, -> { where(:price => nil) }
 
   belongs_to :folder
   has_one_attached :photo
@@ -40,6 +43,7 @@ class Project < ApplicationRecord
   before_validation do |p|
     p.purchased_by = p.purchased_by.presence
     p.folder = Folder.root_folder unless p.folder.present?
+    p.price = nil if p.price&.zero?
   end
 
   def self.sizes
