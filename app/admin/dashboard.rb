@@ -15,8 +15,8 @@ ActiveAdmin.register_page "Dashboard" do
     #   column do
     #     panel "Recent Posts" do
     #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
+    #         Project.order('created_at DESC').limit(5).map do |project|
+    #           li link_to(project.name, admin_project_path(project))
     #         end
     #       end
     #     end
