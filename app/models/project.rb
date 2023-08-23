@@ -46,6 +46,10 @@ class Project < ApplicationRecord
     p.price = nil if p.price&.zero?
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at folder_id medium name price visible year]
+  end
+
   def self.sizes
     {
       :thumbnail => { :resize_to_fit => [400, 250] },

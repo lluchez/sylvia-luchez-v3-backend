@@ -28,6 +28,10 @@ class ConfigurableText < ApplicationRecord
   validates_presence_of :name, :code, :format
   validates :format, :inclusion => { :in => FORMATS }, :if => proc { |t| t.format.present? }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[code created_at name]
+  end
+
   def formatted_format
     FORMATTED_FORMATS[self.format]
   end

@@ -41,4 +41,8 @@ class AdminUser < ApplicationRecord
   scope :locked, lambda { where('locked_at IS NOT NULL') }
   scope :active, lambda { where(:locked_at => nil) }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[email created_at]
+  end
+
 end

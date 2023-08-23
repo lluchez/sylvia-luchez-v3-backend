@@ -46,6 +46,10 @@ class Folder < ApplicationRecord
   validate :root_attribute_wont_change, :if => proc { |f| f.root_was }
   validate :visible_root_folder, :if => proc { |f| f.root? }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at name parent_folder_id visible]
+  end
+
   def self.sizes
     {
       :thumbnail => { :resize_to_fit => [400, 250] },

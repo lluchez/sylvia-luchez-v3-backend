@@ -41,4 +41,10 @@ describe ConfigurableText do
       expect(ConfigurableText.new(:format => :abc).formatted_format).to eq(nil)
     end
   end
+
+  describe 'ransackable_attributes' do
+    it 'spec coverage' do
+      expect(described_class.ransackable_attributes.class).to eq(Array)
+    end
+  end
 end

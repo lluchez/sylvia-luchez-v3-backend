@@ -94,4 +94,10 @@ describe Folder do
       end
     end
   end
+
+  describe 'ransackable_attributes' do
+    it 'spec coverage' do
+      expect(described_class.ransackable_attributes.class).to eq(Array)
+    end
+  end
 end
