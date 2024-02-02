@@ -11,10 +11,10 @@ context.instance_eval do
 
     column "Audited Changes" do |audit|
       lines = []
-      audit.audited_changes.each do |k,v|
-        changes = audit.audited_changes[k]
+      audit.audited_changes.each_key do |key|
+        changes = audit.audited_changes[key]
         if changes.kind_of?(Array) && changes.length == 2
-          lines << "Changed #{k} from #{changes.first || '[nil]'} to #{changes.last || '[nil]'}"
+          lines << "Changed #{key} from #{changes.first || '[nil]'} to #{changes.last || '[nil]'}"
         end
       end
       lines.join("<br />").html_safe

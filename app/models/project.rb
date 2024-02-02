@@ -50,6 +50,10 @@ class Project < ApplicationRecord
     %w[created_at folder_id medium name price visible year]
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    [] # ["audits", "folder", "photo_attachment", "photo_blob"]
+  end
+
   def self.sizes
     {
       :thumbnail => { :resize_to_fit => [400, 250] },
