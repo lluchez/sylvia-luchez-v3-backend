@@ -50,6 +50,10 @@ class Folder < ApplicationRecord
     %w[created_at name parent_folder_id visible]
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    [] # ["audits", "parent_folder", "photo_attachment", "photo_blob", "projects", "sub_folders"]
+  end
+
   def self.sizes
     {
       :thumbnail => { :resize_to_fit => [400, 250] },
