@@ -8,6 +8,9 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
 
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 

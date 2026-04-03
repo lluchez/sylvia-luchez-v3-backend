@@ -17,6 +17,7 @@
 require 'audited-rspec'
 require 'shoulda-matchers'
 require 'simplecov'
+require 'simplecov-json'
 
 SimpleCov.configure do
   add_filter '/config/'
@@ -30,14 +31,13 @@ SimpleCov.configure do
   add_group 'Libraries', 'lib'
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
-                                                       SimpleCov::Formatter::SimpleFormatter,
-                                                       SimpleCov::Formatter::HTMLFormatter
-                                                     ])
+    SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::JSONFormatter
+  ])
 end
 
 SimpleCov.start do
-  coverage_dir ENV.fetch('SIMPLECOV_COVERAGE_DIR', nil) unless ENV['SIMPLECOV_COVERAGE_DIR'].nil?
-
   track_files '{app,lib}/**/*.rb'
 end
 

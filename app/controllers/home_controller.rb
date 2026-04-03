@@ -8,6 +8,6 @@ class HomeController < ApplicationController
   end
 
   def health
-    render :json => 'ok'
+    render :json => { 'ok' => true }
   end
 end
