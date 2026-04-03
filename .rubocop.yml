@@ -1,7 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 3.2.11
+  TargetRubyVersion: 3.4.9
   NewCops: enable
   Exclude:
     - 'db/**/*'
