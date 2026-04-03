@@ -35,7 +35,7 @@ RSpec.describe Api::V1::EmailsController, :type => :controller do
         expect(data).to eq({
           'message' => 'Email is missing',
           'field' => 'email',
-          'value' => ''
+          'value' => nil
         })
       end
 
