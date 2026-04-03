@@ -69,8 +69,6 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run Robocop
+        run: rubocop
 

@@ -27,6 +27,7 @@
 class Project < ApplicationRecord
   include Archiveable
   include Orderable
+
   audited
 
   scope :child_of, ->(folder_id) { where(:folder_id => folder_id) }

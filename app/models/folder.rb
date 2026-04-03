@@ -21,6 +21,7 @@
 class Folder < ApplicationRecord
   include Archiveable
   include Orderable
+
   audited
 
   scope :root, -> { where(:root => true) }
@@ -43,8 +44,8 @@ class Folder < ApplicationRecord
     f.parent_folder_id = Folder.root_folder&.id if f.parent_folder.blank? && !f.root?
   end
 
-  validate :root_attribute_wont_change, :if => proc { |f| f.root_was }
-  validate :visible_root_folder, :if => proc { |f| f.root? }
+  validate :root_attribute_wont_change, :if => proc(&:root_was)
+  validate :visible_root_folder, :if => proc(&:root?)
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at name parent_folder_id visible]

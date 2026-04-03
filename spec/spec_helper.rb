@@ -30,19 +30,16 @@ SimpleCov.configure do
   add_group 'Libraries', 'lib'
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::SimpleFormatter,
-    SimpleCov::Formatter::HTMLFormatter,
-  ])
+                                                       SimpleCov::Formatter::SimpleFormatter,
+                                                       SimpleCov::Formatter::HTMLFormatter
+                                                     ])
 end
 
 SimpleCov.start do
-  if !ENV['SIMPLECOV_COVERAGE_DIR'].nil?
-    coverage_dir ENV['SIMPLECOV_COVERAGE_DIR']
-  end
+  coverage_dir ENV.fetch('SIMPLECOV_COVERAGE_DIR', nil) unless ENV['SIMPLECOV_COVERAGE_DIR'].nil?
 
   track_files '{app,lib}/**/*.rb'
 end
-
 
 RSpec.configure do |config|
   # config.include Devise::Test::ControllerHelpers, :type => :controller
