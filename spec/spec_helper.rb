@@ -14,25 +14,35 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'audited-rspec'
+require 'shoulda-matchers'
 require 'simplecov'
-SimpleCov.start do
+
+SimpleCov.configure do
   add_filter '/config/'
+  add_filter '/db/'
   add_filter '/spec/'
   add_filter '/app/admin/'
 
   add_group 'Models', 'app/models'
   add_group 'Controllers', 'app/controllers'
-  add_group 'Libs', 'lib'
   add_group 'Helpers', 'app/helpers'
+  add_group 'Libraries', 'lib'
+
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::HTMLFormatter,
+  ])
 end
 
-if ENV['CI'] == 'true'
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+SimpleCov.start do
+  if !ENV['SIMPLECOV_COVERAGE_DIR'].nil?
+    coverage_dir ENV['SIMPLECOV_COVERAGE_DIR']
+  end
+
+  track_files '{app,lib}/**/*.rb'
 end
 
-require 'shoulda-matchers'
-require 'audited-rspec'
 
 RSpec.configure do |config|
   # config.include Devise::Test::ControllerHelpers, :type => :controller
