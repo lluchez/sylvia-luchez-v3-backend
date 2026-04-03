@@ -72,3 +72,8 @@ jobs:
       - name: Run Robocop
         run: rubocop
 
+      - name: Report Coverage
+        uses: joshmfrankel/simplecov-check-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # additional arguments: https://github.com/joshmfrankel/simplecov-check-action/blob/main/action.yml
