@@ -2,10 +2,12 @@
   "name": "sylvia-luchez-v3-backend",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.28.0",
     "@rails/actioncable": "^6.1.7-10",
     "@rails/activestorage": "^6.1.7-10",
     "@rails/ujs": "^6.1.7-10",
     "@rails/webpacker": "5.4.4",
+    "babel-loader": "^8.4.1",
     "postcss": "^8.5.15",
     "turbolinks": "^5.2.0",
     "webpack": "^4.47.0",
@@ -17,8 +19,6 @@
     "yarn": "1.22.x"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "babel-loader": "^8.4.1",
     "webpack-dev-server": "^3.11.3",
     "yarn-upgrade-all": "^0.5.4"
   },
