@@ -24,7 +24,7 @@
     "yarn-upgrade-all": "^0.5.4"
   },
   "scripts": {
-    "postinstall": "patch-package"
+    "postinstall": "patch-package || true"
   },
   "resolutions": {
     "@babel/helpers": "^7.26.10",
