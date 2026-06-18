@@ -22,13 +22,6 @@ gem 'sass-rails'
 gem 'turbolinks'
 gem 'webpacker'
 
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,18 +37,18 @@ group :development do
   gem 'annotate'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'listen', '~> 3.3'
+  gem 'listen'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler'
   gem 'rubocop-rails', :require => false
   gem 'spring'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 4.1.0'
+  gem 'web-console'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  # gem 'capybara', '>= 3.26'
+  # gem 'capybara'
   gem 'simplecov'
   gem 'simplecov-json'
   gem 'database_cleaner'
