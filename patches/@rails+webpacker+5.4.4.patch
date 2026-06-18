@@ -1,0 +1,45 @@
+diff --git a/node_modules/@rails/webpacker/package/config.js b/node_modules/@rails/webpacker/package/config.js
+index a964f6b..5288402 100644
+--- a/node_modules/@rails/webpacker/package/config.js
++++ b/node_modules/@rails/webpacker/package/config.js
+@@ -1,5 +1,5 @@
+ const { resolve } = require('path')
+-const { safeLoad } = require('js-yaml')
++const { load } = require('js-yaml')
+ const { readFileSync } = require('fs')
+ const deepMerge = require('./utils/deep_merge')
+ const { isArray, ensureTrailingSlash } = require('./utils/helpers')
+@@ -9,12 +9,12 @@ const configPath = require('./configPath')
+ const defaultConfigPath = require.resolve('../lib/install/config/webpacker.yml')
+ 
+ const getDefaultConfig = () => {
+-  const defaultConfig = safeLoad(readFileSync(defaultConfigPath), 'utf8')
++  const defaultConfig = load(readFileSync(defaultConfigPath), 'utf8')
+   return defaultConfig[railsEnv] || defaultConfig.production
+ }
+ 
+ const defaults = getDefaultConfig()
+-const app = safeLoad(readFileSync(configPath), 'utf8')[railsEnv]
++const app = load(readFileSync(configPath), 'utf8')[railsEnv]
+ 
+ if (isArray(app.extensions) && app.extensions.length) delete defaults.extensions
+ if (isArray(app.static_assets_extensions) && app.static_assets_extensions.length) {
+diff --git a/node_modules/@rails/webpacker/package/env.js b/node_modules/@rails/webpacker/package/env.js
+index b349349..61535a8 100644
+--- a/node_modules/@rails/webpacker/package/env.js
++++ b/node_modules/@rails/webpacker/package/env.js
+@@ -1,4 +1,4 @@
+-const { safeLoad } = require('js-yaml')
++const { load } = require('js-yaml')
+ const { readFileSync } = require('fs')
+ 
+ const NODE_ENVIRONMENTS = ['development', 'production', 'test']
+@@ -8,7 +8,7 @@ const configPath = require('./configPath')
+ const railsEnv = process.env.RAILS_ENV
+ const nodeEnv = process.env.NODE_ENV
+ 
+-const config = safeLoad(readFileSync(configPath), 'utf8')
++const config = load(readFileSync(configPath), 'utf8')
+ const availableEnvironments = Object.keys(config).join('|')
+ const regex = new RegExp(`^(${availableEnvironments})$`, 'g')
+ 

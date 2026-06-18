@@ -10,6 +10,26 @@ ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile",
 
 require "bundler/setup"
 
+def patch_webpacker_yaml_loader!
+  root = File.expand_path("..", __dir__)
+  files = [
+    File.join(root, "node_modules/@rails/webpacker/package/env.js"),
+    File.join(root, "node_modules/@rails/webpacker/package/config.js")
+  ]
+
+  files.each do |file|
+    next unless File.exist?(file)
+
+    content = File.read(file)
+    next unless content.include?("safeLoad")
+
+    updated = content.gsub("safeLoad", "load")
+    File.write(file, updated)
+  end
+end
+
+patch_webpacker_yaml_loader!
+
 require "webpacker"
 require "webpacker/dev_server_runner"
 
