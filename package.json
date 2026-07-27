@@ -20,7 +20,7 @@
     "yarn": "1.22.x"
   },
   "devDependencies": {
-    "webpack-dev-server": "^5.2.5",
+    "webpack-dev-server": "^5.2.6",
     "yarn-upgrade-all": "^0.5.4"
   },
   "scripts": {
